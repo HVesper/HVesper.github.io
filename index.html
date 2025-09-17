@@ -267,6 +267,42 @@
         .sidebar::-webkit-scrollbar-thumb:hover {
             background: rgba(255, 255, 255, 0.4);
         }
+            .hero-section {
+                /* 使用flexbox来居中内容，使其布局更灵活美观 */
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                
+                /* 设置一个基础字体，让整个区域都使用楷体 */
+                font-family: 'KaiTi', '楷体', sans-serif;
+                
+                /* 调整行间距，让上下两句话不至于太挤 */
+                line-height: 1.5; 
+            }
+
+            .hero-title {
+                /* 强制不换行，保持整句话的完整性 */
+                white-space: nowrap;
+                /* 调整主标题的字体大小 */
+                font-size: 3em; 
+                /* 调整字重，使其更显眼 */
+                font-weight: bold; 
+                /* 适当减小字间距，让文字更紧凑 */
+                letter-spacing: -2px; 
+            }
+
+            .hero-subtitle {
+                /* 放大副标题的字体，使其与主标题形成大小对比 */
+                font-size: 1.5em; 
+                /* 适当增加字重，让其更清晰 */
+                font-weight: 500; 
+                /* 调整字间距，增加美感 */
+                letter-spacing: 2px;
+                /* 调整上边距，拉开与主标题的距离，使其布局更舒展 */
+                margin-top: 20px;
+            }
     </style>
 </head>
 <body>
@@ -291,14 +327,12 @@
                 </ul>
             </nav>
         </aside>
-
-        <main class="main-content fade-in">
-            <section class="hero-section">
-                <h1 class="hero-title">实践是检验真理的唯一标准</h1>
-                <p class="hero-subtitle">绝知此事要躬行</p>
-                <!-- <a href="#" class="cta-button">开始探索</a> -->
-            </section>
-        </main>
+            <main class="main-content fade-in">
+                <section class="hero-section">
+                    <h1 class="hero-title">实践是检验真理的唯一标准</h1>
+                    <p class="hero-subtitle">绝知此事要躬行</p>
+                </section>
+            </main>
     </div>
 
     <script>
