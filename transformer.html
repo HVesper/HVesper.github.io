@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>transformer - HVesper</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: '楷体', 'KaiTi', 'STKaiti', serif;
+            background: #000;
+            color: #fff;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            text-align: center;
+            padding: 60px 20px 40px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+
+        .back-btn:hover {
+            color: #fff;
+        }
+
+        .page-title {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            letter-spacing: 3px;
+        }
+
+        .page-subtitle {
+            font-size: 20px;
+            opacity: 0.7;
+            margin-bottom: 10px;
+        }
+
+        .page-description {
+            font-size: 16px;
+            opacity: 0.5;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .search-container {
+            max-width: 500px;
+            margin: 40px auto 0;
+            position: relative;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 15px 50px 15px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 30px;
+            color: #fff;
+            font-size: 16px;
+            font-family: inherit;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .search-box:focus {
+            border-color: rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .search-box::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 18px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+
+        .nav-category {
+            margin-bottom: 50px;
+        }
+
+        .category-title {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 30px;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.9);
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+            letter-spacing: 2px;
+        }
+
+        .nav-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .nav-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 30px 25px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.1);
+        }
+
+        .card-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .card-description {
+            font-size: 16px;
+            opacity: 0.7;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .card-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tag {
+            background: rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-card:hover .tag {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .nav-card.hidden {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 20px;
+            }
+            
+            .page-title {
+                font-size: 32px;
+                letter-spacing: 2px;
+            }
+            
+            .nav-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .back-btn {
+                top: 20px;
+                left: 20px;
+                font-size: 14px;
+            }
+        }
+
+        .nav-card {
+            animation: fadeInUp 0.6s ease-out forwards;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .nav-card:nth-child(1) { animation-delay: 0.1s; }
+        .nav-card:nth-child(2) { animation-delay: 0.2s; }
+        .nav-card:nth-child(3) { animation-delay: 0.3s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-btn">← 返回主页</a>
+    
+    <header class="header">
+        <h1 class="page-title">transformer</h1>
+        <p class="page-subtitle">深入理解 transformer</p>
+        
+        <div class="search-container">
+            <input type="text" class="search-box" id="searchInput" placeholder="搜索知识点..." autocomplete="off">
+            <div class="search-icon">🔍</div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- 基础语法 -->
+        <section class="nav-category">
+            <h2 class="category-title">特性</h2>
+            <div class="nav-cards">
+                <a href="cpp_variables.html" class="nav-card">
+                    <h3 class="card-title">变量与数据类型</h3>
+                    <p class="card-description">基本数据类型、类型推导、常量与变量的声明和使用规范</p>
+                    <div class="card-tags">
+                        <span class="tag">auto</span>
+                        <span class="tag">const</span>
+                        <span class="tag">类型转换</span>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+    <script>
+        // 简单的搜索功能
+        function initSearch() {
+            const searchInput = document.getElementById('searchInput');
+            
+            searchInput.addEventListener('input', function(e) {
+                const query = e.target.value.trim().toLowerCase();
+                const cards = document.querySelectorAll('.nav-card');
+                
+                if (query.length === 0) {
+                    cards.forEach(card => card.classList.remove('hidden'));
+                    return;
+                }
+                
+                cards.forEach(card => {
+                    const title = card.querySelector('.card-title').textContent.toLowerCase();
+                    const description = card.querySelector('.card-description').textContent.toLowerCase();
+                    const tags = Array.from(card.querySelectorAll('.tag')).map(tag => tag.textContent.toLowerCase());
+                    
+                    const matches = title.includes(query) || 
+                                  description.includes(query) ||
+                                  tags.some(tag => tag.includes(query));
+                    
+                    if (matches) {
+                        card.classList.remove('hidden');
+                    } else {
+                        card.classList.add('hidden');
+                    }
+                });
+            });
+        }
+
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.nav-card');
+            cards.forEach((card, index) => {
+                card.style.animationDelay = `${(index % 3) * 0.1 + 0.1}s`;
+            });
+            
+            initSearch();
+        });
+    </script>
+</body>
+</html>
