@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人主页</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: white;
+            min-height: 100vh;
+            padding: 80px 60px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .name {
+            font-size: 2.5em;
+            font-weight: 400;
+            margin-bottom: 30px;
+            color: #222;
+        }
+
+        .bio {
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: #444;
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .bio a {
+            color: #2563eb;
+            text-decoration: none;
+        }
+
+        .bio a:hover {
+            text-decoration: underline;
+        }
+
+        .links {
+            margin-top: 30px;
+            font-size: 1.05em;
+        }
+
+        .links a {
+            color: #2563eb;
+            text-decoration: none;
+            margin: 0 8px;
+        }
+
+        .links a:hover {
+            text-decoration: underline;
+        }
+
+        .separator {
+            color: #666;
+            margin: 0 3px;
+        }
+
+        .section {
+            margin-top: 80px;
+        }
+
+        .section-title {
+            font-size: 2em;
+            font-weight: 400;
+            margin-bottom: 40px;
+            color: #222;
+        }
+
+        .publication {
+            margin-bottom: 35px;
+        }
+
+        .pub-title {
+            font-size: 1.15em;
+            margin-bottom: 8px;
+        }
+
+        .pub-title a {
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .pub-title a:hover {
+            text-decoration: underline;
+        }
+
+        .pub-authors {
+            font-size: 1em;
+            color: #444;
+            margin-bottom: 5px;
+        }
+
+        .pub-venue {
+            font-size: 0.95em;
+            color: #666;
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 30px;
+            }
+
+            .name {
+                font-size: 2em;
+            }
+
+            .bio {
+                font-size: 1em;
+            }
+
+            .section-title {
+                font-size: 1.6em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="name">huyanbin（胡衍滨）</h1>
+            
+            <div class="bio">
+                I am currently enrolled in the Master of Software Engineering program within the School of <a href="http://www.se.sjtu.edu.cn/"> Software at Shanghai Jiao Tong University.
+            </div>
+            
+            <div class="bio">
+               My current research interests include Deep Learning Systems (DL Systems), Reinforcement Learning Systems (RL Systems), and post-training for Multimodal Large Language Models (MLLMs).
+            </div>
+            
+            <div class="links">
+                <a href="mailto:huyanbin@sjtu.edu.cn">Email</a>
+                <span class="separator">/</span>
+               <!--  <a href="#" target="_blank">Google Scholar</a>
+                <span class="separator">/</span>
+                <a href="#" target="_blank">Twitter</a>
+                <span class="separator">/</span>
+                <a href="#" target="_blank">LinkedIn</a>
+                <span class="separator">/</span>
+                <a href="#" target="_blank">Github</a>  -->
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Publications</h2>
+            
+          <!-- /*  <div class="publication">
+                <div class="pub-title">
+                    <a href="#">论文标题：在此填写您的论文完整标题</a>
+                </div>
+                <div class="pub-authors">
+                    您的名字, 合作者1, 合作者2, 合作者3
+                </div>
+                <div class="pub-venue">
+                    To appear in [会议/期刊名称] [年份]
+                </div>
+            </div>
+
+            <div class="publication">
+                <div class="pub-title">
+                    <a href="#">第二篇论文标题</a>
+                </div>
+                <div class="pub-authors">
+                    您的名字, 合作者1, 合作者2
+                </div>
+                <div class="pub-venue">
+                    Published in [会议/期刊名称] [年份]
+                </div>
+            </div>
+
+            <div class="publication">
+                <div class="pub-title">
+                    <a href="#">第三篇论文标题</a>
+                </div>
+                <div class="pub-authors">
+                    您的名字, 合作者1, 合作者2, 合作者3
+                </div>
+                <div class="pub-venue">
+                    Published in [会议/期刊名称] [年份]
+                </div>
+            </div> */ -->
+            
+            <!-- 如需添加更多论文，复制上面的 publication div 块即可 -->
+        </div>
+    </div>
+</body>
+</html>
