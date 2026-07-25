@@ -55,6 +55,50 @@
             text-decoration: underline;
         }
 
+        .internships {
+            margin-top: 34px;
+            text-align: left;
+        }
+
+        .internships-title {
+            margin-bottom: 20px;
+            color: #222;
+            font-size: 1.35em;
+            font-weight: 500;
+        }
+
+        .internship-item {
+            display: grid;
+            grid-template-columns: 54px 1fr;
+            gap: 18px;
+            align-items: start;
+        }
+
+        .company-logo {
+            width: 54px;
+            height: 54px;
+            padding: 8px;
+            border: 1px solid #eee;
+            border-radius: 12px;
+            object-fit: contain;
+        }
+
+        .company-name {
+            margin-bottom: 5px;
+            color: #222;
+            font-size: 1.05em;
+            font-weight: 600;
+        }
+
+        .company-team {
+            color: #777;
+            font-weight: 400;
+        }
+
+        .internship-description {
+            margin-bottom: 0;
+        }
+
         .links {
             margin-top: 30px;
             font-size: 1.05em;
@@ -144,9 +188,20 @@
             <div class="bio">
                 I am currently pursuing a master's degree at the School of Computer Science, Shanghai Jiao Tong University (2025 – Present).
             </div>
-            
-            <div class="bio">
-                During my internship with the LLM Infrastructure team at Xiaohongshu, I worked on dLLM-SGLang, focusing on inference optimization for diffusion large language models (dLLMs).
+
+            <div class="internships">
+                <h2 class="internships-title">Internship Experience</h2>
+                <div class="internship-item">
+                    <img class="company-logo" src="assets/xiaohongshu.svg" alt="Xiaohongshu logo">
+                    <div>
+                        <div class="company-name">
+                            Xiaohongshu <span class="company-team">· LLM Infrastructure</span>
+                        </div>
+                        <div class="bio internship-description">
+                            During my internship at Xiaohongshu, I worked on dLLM-SGLang, focusing on inference optimization for diffusion large language models (dLLMs).
+                        </div>
+                    </div>
+                </div>
             </div>
             
             <div class="links">
