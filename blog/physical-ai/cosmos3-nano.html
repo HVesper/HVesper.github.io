@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Cosmos3 - nano 模型学习笔记：模型架构、Reasoner 与 Generator、动作编码、输出格式与后训练。">
+    <title>Cosmos3 - nano 模型 | 物理 AI · vesper</title>
+    <link rel="stylesheet" href="../../assets/blog.css">
+</head>
+<body>
+    <div class="container">
+        <header class="site-header">
+            <a class="site-name" href="../../">vesper</a>
+            <nav class="site-nav" aria-label="主导航">
+                <a href="../../">首页</a>
+                <a href="../">博客</a>
+            </nav>
+        </header>
+
+        <nav aria-label="面包屑导航">
+            <ol class="breadcrumb">
+                <li><a href="../">博客</a></li>
+                <li><a href="./">物理 AI</a></li>
+                <li aria-current="page">Cosmos3 - nano 模型</li>
+            </ol>
+        </nav>
+
+        <main>
+            <article>
+                <header class="page-heading article-header">
+                    <p class="eyebrow">PHYSICAL AI</p>
+                    <h1>Cosmos3 - nano 模型</h1>
+                    <div class="post-meta">
+                        <a class="category-tag" href="./">物理 AI</a>
+                        <span>原文更新于 <time datetime="2026-09-04">2026-09-04</time></span>
+                        <a href="https://my.feishu.cn/wiki/QX99wNurmifNhTkim50c7dzenqh?from=from_copylink" target="_blank" rel="noopener noreferrer">飞书原文 <span aria-hidden="true">↗</span></a>
+                    </div>
+                </header>
+
+                <nav class="article-toc" aria-labelledby="toc-title">
+                    <h2 id="toc-title">目录</h2>
+                    <ul>
+                        <li>
+                            <a href="#architecture">1、模型架构</a>
+                            <ul>
+                                <li><a href="#reasoner">1.1 Reasoner Mode</a></li>
+                                <li>
+                                    <a href="#generator">1.2 Generator Mode</a>
+                                    <ul>
+                                        <li><a href="#action-encoder">1.2.1 action encoder</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#outputs">1.3 Cosmos3 - Nano 输出</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#post-training">2、后训练 Cosmos3系列模型</a></li>
+                    </ul>
+                </nav>
+
+                <div class="article-content">
+                    <h2 id="architecture">1、模型架构</h2>
+                    <p>整个，cosmos3系列的模型，都是全模态模型，输入分为语言、视觉、音频、动作。</p>
+                    <figure>
+                        <a href="../../assets/blog/physical-ai/cosmos3-nano-architecture.png" target="_blank" rel="noopener noreferrer" aria-label="查看大图：Cosmos3 模型架构">
+                            <img src="../../assets/blog/physical-ai/cosmos3-nano-architecture.png" alt="Cosmos3 模型架构" width="1539" height="816" loading="lazy" decoding="async">
+                        </a>
+                    </figure>
+                    <p>针对这个cosmos模型而言，其分为两部分，Reasoner和Generator，以cosmos3-nano为例，reasoner和generator分别占了约8B，然后cosmos3-nano整个占了16B的大小</p>
+                    <h3 id="reasoner">1.1 Reasoner  Mode</h3>
+                    <p>当前这一部分主要是用qwen-vl系列模型来做多模态的理解，输入是vision和text，然后输出是text token，</p>
+                    <h3 id="generator">1.2 Generator Mode</h3>
+                    <p>这一部分是传统生成模型的流程，这里针对视频、音频以及action分别都有各自不同的encoder，然后通过一层proj之后，全部映射到generator transformer中，这个hidden size是4096维。</p>
+                    <h4 id="action-encoder">1.2.1 action encoder</h4>
+                    <p>这里和传统的video gen模型（或者说全模态模型）不同的点在于这个action的输入，我视频的每两帧之间，都会有一个action的参数，来标记当前action的动作是什么（也就是帧的转移）</p>
+                    <figure>
+                        <a href="../../assets/blog/physical-ai/cosmos3-nano-action-encoder.png" target="_blank" rel="noopener noreferrer" aria-label="查看大图：Action encoder 示意图">
+                            <img src="../../assets/blog/physical-ai/cosmos3-nano-action-encoder.png" alt="Action encoder 示意图" width="1672" height="941" loading="lazy" decoding="async">
+                        </a>
+                    </figure>
+                    <h3 id="outputs">1.3 Cosmos3 - Nano 输出</h3>
+                    <p>Cosmos3 有多种不同的输出：</p>
+                    <figure>
+                        <a href="../../assets/blog/physical-ai/cosmos3-nano-output-modalities.png" target="_blank" rel="noopener noreferrer" aria-label="查看大图：Cosmos3 支持的输出类型">
+                            <img src="../../assets/blog/physical-ai/cosmos3-nano-output-modalities.png" alt="Cosmos3 支持的输出类型" width="2021" height="644" loading="lazy" decoding="async">
+                        </a>
+                    </figure>
+                    <p>以下是cosmos3-nano支持输出的视频格式</p>
+                    <figure>
+                        <a href="../../assets/blog/physical-ai/cosmos3-nano-video-formats.png" target="_blank" rel="noopener noreferrer" aria-label="查看大图：Cosmos3-nano 支持的视频格式">
+                            <img src="../../assets/blog/physical-ai/cosmos3-nano-video-formats.png" alt="Cosmos3-nano 支持的视频格式" width="682" height="413" loading="lazy" decoding="async">
+                        </a>
+                    </figure>
+                    <p>Cosmos3系列模型在采样所需要的参数列表，可见除了only action输出只需要4 steps去噪，其他都建议是50 steps做去噪。</p>
+                    <figure>
+                        <a href="../../assets/blog/physical-ai/cosmos3-nano-sampling-parameters.png" target="_blank" rel="noopener noreferrer" aria-label="查看大图：Cosmos3 采样参数">
+                            <img src="../../assets/blog/physical-ai/cosmos3-nano-sampling-parameters.png" alt="Cosmos3 采样参数" width="2048" height="593" loading="lazy" decoding="async">
+                        </a>
+                    </figure>
+                    <h2 id="post-training">2、后训练 Cosmos3系列模型</h2>
+                    <p>训练数据中的视频，感觉可以初步对齐cosmos3中默认的生成视频的格式：</p>
+                    <div class="article-indent">
+                        <p>分辨率：832 × 480 </p>
+                        <p>帧率：24 FPS</p>
+                        <p> 帧数：189帧 </p>
+                        <p>时长：189 ÷ 24 = 7.875秒</p>
+                    </div>
+                </div>
+
+                <footer class="article-end">
+                    <a href="./"><span aria-hidden="true">←</span> 返回物理 AI 专栏</a>
+                </footer>
+            </article>
+        </main>
+
+        <footer class="site-footer">
+            <span>huyanbin（胡衍滨）</span> · <a href="../../">返回首页</a>
+        </footer>
+    </div>
+</body>
+</html>

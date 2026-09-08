@@ -122,6 +122,49 @@
             text-decoration: underline;
         }
 
+        .site-nav {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-top: 24px;
+        }
+
+        .site-nav a,
+        .blog-preview a {
+            color: #2563eb;
+            text-decoration: none;
+        }
+
+        .site-nav a:hover,
+        .blog-preview a:hover {
+            text-decoration: underline;
+        }
+
+        .site-nav [aria-current="page"] {
+            color: #222;
+        }
+
+        .blog-preview {
+            padding: 24px 0;
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+        }
+
+        .blog-preview h3 {
+            margin-bottom: 8px;
+            font-size: 1.2em;
+            font-weight: 500;
+        }
+
+        .blog-preview p {
+            color: #666;
+        }
+
+        .blog-more {
+            display: inline-block;
+            margin-top: 16px;
+        }
+
         .separator {
             color: #666;
             margin: 0 3px;
@@ -238,7 +281,20 @@
                 <span class="separator">/</span>
                 <a href="#" target="_blank">Github</a>  -->
             </div>
+            <nav class="site-nav" aria-label="主导航">
+                <a href="./" aria-current="page">首页</a>
+                <a href="blog/">博客</a>
+            </nav>
         </div>
+
+        <section class="section" aria-labelledby="blog-title">
+            <h2 class="section-title" id="blog-title">Blog · 博客</h2>
+            <div class="blog-preview">
+                <h3><a href="blog/physical-ai/">物理 AI</a></h3>
+                <p>记录物理 AI 方向的学习、思考与研究笔记。</p>
+                <a class="blog-more" href="blog/">浏览博客 <span aria-hidden="true">→</span></a>
+            </div>
+        </section>
 
         <div class="section">
             <h2 class="section-title">Publications</h2>
